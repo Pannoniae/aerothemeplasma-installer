@@ -149,8 +149,8 @@ function main
     check_folder
 
     # Install components
-    #install_plasma_components
-    #install_kwin_components
+    install_plasma_components
+    install_kwin_components
     install_misc_components
 
     echo "AeroThemePlasma installation complete!"
