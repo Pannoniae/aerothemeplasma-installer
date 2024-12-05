@@ -62,7 +62,7 @@ function install_plasma_components
 
     # Install Plasma-related folders
     mkdir -p $HOME/.local/share/plasma
-    cp -r plasma/desktoptheme plasma/look-and-feel plasma/plasmoids plasma/shells $HOME/.local/share/plasma/
+    cp -r plasma/desktoptheme plasma/look-and-feel plasma/plasmoids plasma/shells plasma/layout-templates $HOME/.local/share/plasma/
     #cp -r plasma/look-and-feel plasma/plasmoids plasma/shells $HOME/.local/share/plasma/
 
     # Compile plasmoid C++ components
