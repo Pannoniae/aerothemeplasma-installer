@@ -123,7 +123,7 @@ function install_misc_components
 
     # Install sounds
     mkdir -p $HOME/.local/share/sounds
-    tar -xf misc/sounds/Archive.tar.gz -C $HOME/.local/share/sounds
+    tar -xf misc/sounds/sounds.tar.gz -C $HOME/.local/share/sounds
 
     # Install icons
     mkdir -p $HOME/.local/share/icons
