@@ -65,16 +65,6 @@ function install_plasma_components
     cp -r plasma/desktoptheme plasma/look-and-feel plasma/plasmoids plasma/shells plasma/layout-templates $HOME/.local/share/plasma/
     #cp -r plasma/look-and-feel plasma/plasmoids plasma/shells $HOME/.local/share/plasma/
 
-    # Compile plasmoid C++ components
-    for src_folder in plasma/plasmoids/src/*
-        if test -f $src_folder/install.sh
-            pushd $src_folder
-            chmod +x install.sh
-            ./install.sh
-            popd
-        end
-    end
-
     # Install SDDM theme
     sudo cp -r plasma/sddm/sddm-theme-mod /usr/share/sddm/themes/
     pushd /usr/share/sddm/themes/sddm-theme-mod/Services
@@ -85,23 +75,10 @@ end
 
 # Install KWin components
 function install_kwin_components
-    # Compile decoration theme and effects
-    for src_folder in kwin/decoration/*
-        if test -f $src_folder/install.sh
-            pushd $src_folder
-            chmod +x install.sh
-            ./install.sh
-            popd
-        end
-    end
-    for src_folder in kwin/effects_cpp/*
-        if test -f $src_folder/install.sh
-            pushd $src_folder
-            chmod +x install.sh
-            ./install.sh
-            popd
-        end
-    end
+
+    # Compile important components
+    chmod +x compile.sh
+    ./compile.sh
 
     # Install KWin-related folders
     mkdir -p $HOME/.local/share/kwin
