@@ -56,29 +56,25 @@ end
 
 # Install Plasma components
 function install_plasma_components
-    # Install smod resources
-    mkdir -p $HOME/.local/share
-    cp -r plasma/smod $HOME/.local/share/
 
-    # Install Plasma-related folders
-    mkdir -p $HOME/.local/share/plasma
-    cp -r plasma/desktoptheme plasma/look-and-feel plasma/plasmoids plasma/shells plasma/layout-templates $HOME/.local/share/plasma/
-    #cp -r plasma/look-and-feel plasma/plasmoids plasma/shells $HOME/.local/share/plasma/
+    chmod +x install_plasmoids.sh
+    ./install_plasmoids.sh
 
-    # Install SDDM theme
-    sudo cp -r plasma/sddm/sddm-theme-mod /usr/share/sddm/themes/
-    pushd /usr/share/sddm/themes/sddm-theme-mod/Services
-    sudo chmod +x install-services.sh
-    sudo ./install-services.sh
-    popd
+    chmod +x install_plasma_components.sh
+    install_plasma_components.sh # Requires authorization for SMOD resources and SDDM themes
 end
 
 # Install KWin components
 function install_kwin_components
 
+    echo "Running install script..."
+
     # Compile important components
     chmod +x compile.sh
     ./compile.sh
+
+
+
 
     # Install KWin-related folders
     mkdir -p $HOME/.local/share/kwin
