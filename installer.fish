@@ -2,16 +2,6 @@
 
 # AeroThemePlasma Installation Script
 
-# Determine the real user who invoked sudo
-set REAL_USER (logname)
-set HOME (getent passwd $REAL_USER | cut -d: -f6)
-
-# Check if running with sufficient privileges
-if not test (id -u) -eq 0
-    echo "This script must be run with sudo or as root."
-    exit 1
-end
-
 function check_folder
     if not test -d kwin
         echo "AeroThemePlasma not found in the current folder."
@@ -61,7 +51,7 @@ function install_plasma_components
     ./install_plasmoids.sh
 
     chmod +x install_plasma_components.sh
-    install_plasma_components.sh # Requires authorization for SMOD resources and SDDM themes
+    ./install_plasma_components.sh
 end
 
 # Install KWin components
@@ -73,45 +63,24 @@ function install_kwin_components
     chmod +x compile.sh
     ./compile.sh
 
-
-
-
-    # Install KWin-related folders
-    mkdir -p $HOME/.local/share/kwin
-    cp -r kwin/effects kwin/tabbox kwin/outline kwin/scripts $HOME/.local/share/kwin/
+    chmod +x install_kwin_components.sh
+    ./install_kwin_components.sh
 end
 
 # Install miscellaneous components
 function install_misc_components
-    # Install default tooltip
-    if test -f misc/defaulttooltip/install.sh
-        pushd misc/defaulttooltip
-        chmod +x install.sh
-        ./install.sh
-        popd
-    end
+    chmod +x install_misc_components.sh
+    ./install_misc_components.sh
 
-    # Install Kvantum theme
-    cp -r misc/kvantum/Kvantum $HOME/.config/
+    # Install UAC skin for PolKit
+    cd misc
+    cd uac-polkitagent
 
-    # Install sounds
-    mkdir -p $HOME/.local/share/sounds
-    tar -xf misc/sounds/sounds.tar.gz -C $HOME/.local/share/sounds
+    chmod +x install_ninja.sh
+    ./install_ninja.sh
+    chmod +x add_rule.sh
+    ./add_rule.sh
 
-    # Install icons
-    mkdir -p $HOME/.local/share/icons
-    tar -xf "misc/icons/Windows 7 Aero.tar.gz" -C $HOME/.local/share/icons
-
-    # Install cursor theme
-    sudo tar -xf misc/cursors/aero-drop.tar.gz -C /usr/share/icons
-
-    # Install mimetypes
-    mkdir -p $HOME/.local/share/mime/packages
-    cp misc/mimetype/* $HOME/.local/share/mime/packages/
-    update-mime-database $HOME/.local/share/mime
-
-    # Optional: Configure font hinting
-    cp -r misc/fontconfig $HOME/.config/
 end
 
 # Main installation function
