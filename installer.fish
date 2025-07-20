@@ -48,7 +48,7 @@ end
 function install_plasma_components
 
     chmod +x install_plasmoids.sh
-    ./install_plasmoids.sh
+    ./install_plasmoids.sh --ninja
 
     chmod +x install_plasma_components.sh
     ./install_plasma_components.sh
@@ -61,7 +61,7 @@ function install_kwin_components
 
     # Compile important components
     chmod +x compile.sh
-    ./compile.sh
+    ./compile.sh --wayland --ninja
 
     chmod +x install_kwin_components.sh
     ./install_kwin_components.sh
@@ -76,8 +76,8 @@ function install_misc_components
     cd misc
     cd uac-polkitagent
 
-    chmod +x install_ninja.sh
-    ./install_ninja.sh
+    chmod +x install.sh
+    ./install.sh --ninja
     chmod +x add_rule.sh
     ./add_rule.sh
 
